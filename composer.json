@@ -73,13 +73,19 @@
         "php paypal",
         "paypal"
     ],
-    "homepage": "https://github.com/shetabit/multipay",
+    "homepage": "https://github.com/mota9100/multipay",
     "license": "MIT",
     "authors": [
         {
             "name": "Mahdi Khanzadi",
             "email": "khanzadimahdi@gmail.com",
             "homepage": "https://github.com/shetabit",
+            "role": "Developer"
+        },
+        {
+            "name": "Moslem Tayari",
+            "email": "motaprogrammet@yahoo.com",
+            "homepage": "https://github.com/mota9100",
             "role": "Developer"
         }
     ],
