@@ -6,13 +6,11 @@ use Shetabit\Multipay\Contracts\DriverInterface;
 use Shetabit\Multipay\Contracts\ReceiptInterface;
 use Shetabit\Multipay\Exceptions\DriverNotFoundException;
 use Shetabit\Multipay\Exceptions\InvoiceNotFoundException;
-use Shetabit\Multipay\Traits\HasPaymentEvents;
 use Shetabit\Multipay\Traits\InteractsWithRedirectionForm;
 
 class Payment
 {
     use InteractsWithRedirectionForm;
-    use HasPaymentEvents;
 
     /**
      * Payment Configuration.
@@ -214,13 +212,6 @@ class Payment
             call_user_func_array($finalizeCallback, [$this->driverInstance, $transactionId]);
         }
 
-        // dispatch event
-        $this->dispatchEvent(
-            'purchase',
-            $this->driverInstance,
-            $this->driverInstance->getInvoice()
-        );
-
         return $this;
     }
 
@@ -243,13 +234,6 @@ class Payment
 
         $this->validateInvoice();
 
-        // dispatch event
-        $this->dispatchEvent(
-            'pay',
-            $this->driverInstance,
-            $this->driverInstance->getInvoice()
-        );
-
         return $this->driverInstance->pay();
     }
 
@@ -271,14 +255,6 @@ class Payment
         if (!empty($finalizeCallback)) {
             call_user_func($finalizeCallback, $receipt, $this->driverInstance);
         }
-
-        // dispatch event
-        $this->dispatchEvent(
-            'verify',
-            $receipt,
-            $this->driverInstance,
-            $this->driverInstance->getInvoice()
-        );
 
         return $receipt;
     }
